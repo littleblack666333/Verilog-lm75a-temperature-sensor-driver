@@ -302,14 +302,14 @@ module lm75a_driver(
         tens = 4'd0;
         hundreds = 4'd0;
         data_temp = {1'b0, data[7:1]};
-        for (i = 0; i < 8; i = i + 1'b1) begin
-            if (ones > 4'd5) begin
+        for (i = 0; i < 8; i = i + 1) begin
+            if (ones >= 4'd5) begin
                 ones = ones + 4'd3;
             end
-            if (tens > 4'd5) begin
+            if (tens >= 4'd5) begin
                 tens = tens + 4'd3;
             end
-            if (hundreds > 4'd5) begin
+            if (hundreds >= 4'd5) begin
                 hundreds = hundreds + 4'd3;
             end
             hundreds = {hundreds[2:0], tens[3]};
