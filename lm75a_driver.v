@@ -63,6 +63,7 @@ module lm75a_driver(
     reg [15:0] buff;  // buffer of data directly read from sda_input
     reg [7:0] data;  // 8-bit binary temperature data (sign bit not included)
     reg [7:0] data_temp;  // temporary register used to decode temperature data
+    
     integer i;  // iteration variable used to decode temperature data
 
     // instance of inout sda
