@@ -26,17 +26,6 @@ module lm75a_driver(
     output scl;  // scl port of i2c protocol
     inout sda;  // sda port of i2c protocol
 
-    wire clk;
-    wire rst_n;
-    reg valid;
-    reg sign;
-    reg [3:0] fractional;
-    reg [3:0] ones;
-    reg [3:0] tens;
-    reg [3:0] hundreds;
-    reg scl;
-    wire sda;
-
     // self-defined parameters
     parameter DEVICE_ADDR = 8'b1001_000_1;  // address of lm75a device, A2 A1 AO are self-defined bits
     parameter READ_TIME = 32'd50_000_000;  // time of one read period, for 50MHz clk freq, it is 1s(1Hz)
@@ -49,6 +38,17 @@ module lm75a_driver(
     localparam READ_MSB = 4'd3;
     localparam READ_LSB = 4'd4;
     localparam FINISH = 4'd5;
+
+    wire clk;
+    wire rst_n;
+    reg valid;
+    reg sign;
+    reg [3:0] fractional;
+    reg [3:0] ones;
+    reg [3:0] tens;
+    reg [3:0] hundreds;
+    reg scl;
+    wire sda;
 
     reg sda_dir;  // data direction on sda, 1: master -> device, 0: master <- device
     wire sda_input;  // sda data input
