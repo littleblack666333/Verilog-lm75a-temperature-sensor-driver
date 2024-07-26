@@ -36,12 +36,15 @@ This module contains 2 input ports, 7 output ports, and 1 inout port. The port d
   the driver is `000`. The last bit represents the read/write signal, with `1` indicating data read and `0` indicating 
   data write. Since this driver only includes the function of reading temperature data, the last bit should remain `1`.
 * `READ_TIME`: The number of `clk` clock signal cycles included in one temperature reading, used to control the reading 
-  frequency. When the `clk` signal is 50MHz, the default reading cycle is 1s.
+  frequency. When the `clk` signal is 50MHz, the default reading cycle is 1s. Check the widths of related registers 
+  after adjustment.\
+  *related register:* `cnt_read`
 * `STEP_TIME`: The number of `clk` signal cycles included in one period of the `scl` signal during the reading process, 
   used to control the frequency of the `scl` signal. This frequency should be set according to the actual device 
   situation and should not be too fast. Additionally, it is recommended to set the last 2 bits of this constant 
   (in binary representation) to `0`. When the `clk` signal frequency is 50MHz, the default period of the `scl` signal 
-  is 1us.
+  is 1us. Check the widths of related registers after adjustment.\
+  *related register:* `cnt_step`
 ------------------------------------------------------------------------------------------------------------------------
 ## 基本描述
 本代码是LM75A温度传感器的Verilog驱动程序，用于利用FPGA读取该传感器报告的温度值。LM75A是一款I2C协议的温度传感器，温度测量精度可达到
@@ -70,6 +73,8 @@ This module contains 2 input ports, 7 output ports, and 1 inout port. The port d
 * `DEVICE_ADDR`: LM75A器件的地址。前4位1001不可修改。中间3位分别为LM75A的`A2`、`A1`、`A0`地址位，应根据实际情况修改，驱动程序中
   默认为`000`。最后一位表示读/写信号，`1`表示读取数据，`0`表示写入数据，由于本驱动仅包含读取温度数据的功能，因此应保持最后一位
   为`1`。
-* `READ_TIME`: 读取一次温度包含的`clk`时钟信号的周期个数，用于控制读取温度的频率。在`clk`信号为50MHz的情况下，默认的读取周期为1s。
+* `READ_TIME`: 读取一次温度包含的`clk`时钟信号的周期个数，用于控制读取温度的频率。在`clk`信号为50MHz的情况下，默认的读取周期为1s。更改后请检查相关寄存器的位宽。\
+  *相关寄存器：* `cnt_read`
 * `STEP_TIME`: 在读取过程中`scl`信号一个周期包含的clk信号的周期个数，用于控制`scl`信号的频率。该频率应根据实际的器件情况设定，不应
-  过快。此外，建议将该常数（以二进制表示）的最后2位数据设定为`0`。在`clk`信号频率为50MHz的情况下，`scl`信号的周期默认为1us。
+过快。此外，建议将该常数（以二进制表示）的最后2位数据设定为`0`。在`clk`信号频率为50MHz的情况下，`scl`信号的周期默认为1us。更改后请检查相关寄存器的位宽。\
+  *相关寄存器：* `cnt_step`
